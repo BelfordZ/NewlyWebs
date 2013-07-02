@@ -1,0 +1,102 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 Sortable jQuery Plugin</title>
+	<style>
+		/*
+		header, section {
+			display: block;
+		}
+		*/
+		body {
+			font-family: 'Droid Serif';
+		}
+		h1, h2 {
+			text-align: center;
+			font-weight: normal;
+		}
+		.connected, .sortable, .exclude, .handles {
+			margin: auto;
+			padding: 0;
+			width: 675px;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.sortable.grid {
+			overflow: hidden;
+		}
+		.connected li, .sortable li, .exclude li, .handles li {
+			list-style: none;
+			border: 2px solid #CCC;
+			/*background: #F6F6F6;*/
+			font-family: "Tahoma";
+			color: #1C94C4;
+			margin: 5px;
+			padding: 5px;
+			/*height: 22px;*/
+		}
+		.sortable.grid li {
+			cursor: move;
+			line-height: 200px;
+			float: left;
+			width: 200px;
+			height: 200px;
+			/*height: auto;*/
+			text-align: center;
+		}
+		li.sortable-placeholder {
+			border: 2px dashed #CCC;
+			background: none;
+		}
+	</style>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+	<section>
+		<h2>Sortable Grid</h2>
+		<ul class="sortable grid" id="gallery_grid">
+			<li id="210"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/1a-an-engaged-couple-pose6.jpg" width="200"></li>
+			<li id="211"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/engagement2.jpg" width="200"></li>
+			<li id="212"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/smiling_engaged_couple1-624x416.jpg" width="200"></li>
+			<li id="213"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/engagement2.jpg" width="200"></li>
+			<li id="214"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/smiling_engaged_couple1-624x416.jpg" width="200"></li>
+			<li id="215"><img src="http://localhost/~eric/weddingsite/web/janeandjoe/wp-content/uploads/sites/2/2013/03/1a-an-engaged-couple-pose6.jpg" width="200"></li>
+		</ul>
+	</section>
+	
+	<form action="test.php" method="POST">
+	<input type="hidden" name="display_layout" id="display_layout" value="">
+	<input type="submit">
+	</form>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="jquery.sortable.js"></script>
+	<script>
+		$(function() {
+			$('#gallery_grid li').each(function () {
+				//alert($(this).attr('id'))
+				$('#display_layout').val($('#display_layout').val() + ',' + $(this).attr('id'));
+			});
+			$('.sortable').sortable().bind('sortupdate', function() {
+				//lis = $('#gallery_grid li');
+				//alert(lis.html());
+				//alert($('#gallery_grid li').html());
+				//reset field
+				$('#display_layout').val('');
+				$('#gallery_grid li').each(function () {
+					//alert($(this).attr('id'))
+					$('#display_layout').val($('#display_layout').val() + ',' + $(this).attr('id'));
+				});
+			    //$('#display_layout').text();
+			});
+			
+		});
+	</script>
+</body>
+</html>

@@ -42,10 +42,46 @@ get_header(); ?>
 			
 			<?php
 			foreach ($pages as $page) :
+				/*
+				print "<pre>";
+				print_r($page);
+				print "</pre>";
+				*/
 				//print $page->object_id;
-				$page_obj = get_page($page->object_id);
-				print $page_obj->post_content;
-				print "<hr>";
+				$page_id = $page->object_id;
+				$page_obj = get_page($page_id);
+				/*
+				print "<pre>";
+				print_r($page_obj);
+				print "</pre>";
+				*/
+				//print $page_obj->post_content;
+				$post_meta = get_post_meta($page_id);
+				
+				/*
+				print "<pre>";
+				print_r($post_meta['_wp_page_template']);
+				print "</pre>";
+				*/
+				
+				if ($post_meta['_wp_page_template'][0] == 'default' || empty($post_meta['_wp_page_template'][0]))
+					$page_template = "page.php";
+				else
+					$page_template = $post_meta['_wp_page_template'][0];
+				
+				//print $page_template;
+				
+				if ( $page_template_file = locate_template($page_template,false,false) ) {
+					
+					// create anchor name for each section 
+					print '<a name="' . $page_obj->post_name . '"></a>';
+					query_posts( 'page_id='.$page_id );
+					load_template($page_template_file, false);
+					
+				}
+				print "
+				<div class=\"clear\"></div>
+				<hr>";
 			?>
 			
 			
