@@ -22,7 +22,6 @@ function create_post_type() {
 	);
 }
 
-
 function get_content_id_by_post_name($post_name) {
 	global $wpdb;
 	

@@ -17,12 +17,14 @@ $submenu_file = 'edit.php';
 
 wp_reset_vars(array('action', 'safe_mode', 'withcomments', 'posts', 'content', 'edited_post_title', 'comment_error', 'profile', 'trackback_url', 'excerpt', 'showcomments', 'commentstart', 'commentend', 'commentorder'));
 
-if ( isset( $_GET['post'] ) )
+if ( isset( $_GET['post'] ) ) {
  	$post_id = $post_ID = (int) $_GET['post'];
-elseif ( isset( $_POST['post_ID'] ) )
+} elseif ( isset( $_POST['post_ID'] ) ) {
  	$post_id = $post_ID = (int) $_POST['post_ID'];
-else
+} else {
  	$post_id = $post_ID = 0;
+}
+
 
 $post = $post_type = $post_type_object = null;
 
@@ -121,7 +123,6 @@ case 'post-quickpress-save':
 		wp_dashboard_quick_press();
 		exit;
 	}
-
 	redirect_post($post_id);
 	exit();
 	break;
@@ -214,6 +215,7 @@ case 'editpost':
 	$menu_item_count = 0;
 	$menu = wp_get_nav_menu_object('menu');
 	$menu_items = wp_get_nav_menu_items($menu->term_id);
+    
 	foreach ($menu_items as $menu_item) {
 		if ($menu_item->object_id == $post_id)
 			$found = true;

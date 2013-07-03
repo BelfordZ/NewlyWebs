@@ -10,19 +10,9 @@ if ( ! current_user_can( $post_type_object->cap->edit_posts ) )
 	wp_die( __( 'Cheatin&#8217; uh?' ) );
 
 
-function web_safe_url($str)
-{
-	$search = array('/\//',
-					'/\&/',
-					'/ /',
-					'/"/',
-					'/\'/');
-	$replace = array('-',
-					 '',
-					 '-',
-					 '',
-					 '');
-	
+function web_safe_url($str) {
+	$search = array('/\//', '/\&/', '/ /', '/"/', '/\'/');
+	$replace = array('-', '', '-', '', '');	
 	return urlencode(preg_replace($search, $replace, strtolower($str)));
 }
 
